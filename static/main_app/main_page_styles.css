@@ -1,22 +1,8 @@
-#expandButton {
-    outline: none;
-    border: none;
-}
-
-.navbar {
-    background-color: #68A691;
-}
-
-h2 {
-    color: white;
-}
-
 #optionsContainer {
     text-align: center;
 }
 
 button {
-    color: rgb(250, 250, 250);
     font-size: 1.5em;
     border-radius: 8px;
 }
@@ -26,11 +12,14 @@ button:hover {
 }
 
 #hateButton {
+    color: rgb(250, 250, 250);
     margin-right: 8px;
     background-color: rgb(201, 104, 104);
 }
 
 #loveButton {
+    color: rgb(250, 250, 250);
     margin-left: 8px;
     background-color: #68A691;
+    color: white;
 }

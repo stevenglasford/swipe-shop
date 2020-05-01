@@ -1,1 +1,90 @@
-<p>Hello I live in the messages directory of templates folder</p>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main_app/header_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'main_app/messages_styles.css' %}">
+
+    <title>SwipeShop</title>
+</head>
+
+<body>
+    <div id="container">
+        <div>
+            {% include "header/index.html" %}
+        </div>
+
+        <div id="otherUser" class="d-flex justify-content-between">
+            <img (click)="back()" id="backIcon" src="{% static 'images/back.png' %}" alt="back">
+            <div>Other Username</div>
+            <div id="rightSpace"></div>
+        </div>
+
+        <div #scrollable id="messages">
+            <div id="messagesInner">
+                <!-- If no messages -->
+                <div class="newDay">
+                    No Messages
+                    <hr class="solid">
+                </div>
+
+
+                <!-- <div *ngFor="let message of messages" class="message">
+
+
+                    <div *ngIf="needsDateSeparator[messages.indexOf(message)]" class="newDay">
+                        {{message.sentDate | date:'EEEE, MMMM d'}}
+                        <hr class="solid">
+                    </div>
+
+                    <div *ngIf="message.toUser.username == myUsername" class="messages-left">
+                        <div *ngIf="!(messageIsMiddle[messages.indexOf(message)] || messageIsEnd[messages.indexOf(message)])" class="time time-left">{{message.sentDate | date:'h:mm a'}}</div>
+                        <img *ngIf="message.attachmentUrl == ''" class="messageProfilePicture" src="{{message.fromUser.picture}}" alt="profile">
+                        <div *ngIf="message.attachmentUrl == ''" class="msg msg-left fade-in" [ngClass]="{'startMessageLeft' : messageIsStart[messages.indexOf(message)], 'middleMessageLeft' : messageIsMiddle[messages.indexOf(message)]}">{{message.message}}</div>
+
+                        <div *ngIf="message.attachmentUrl != ''" class="attachmentContainerLeft">
+                            <img class="attachment" src={{message.attachmentUrl}} alt="attachment">
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="message.toUser.username != myUsername" class="messages-right">
+                        <div *ngIf="!(messageIsMiddle[messages.indexOf(message)] || messageIsEnd[messages.indexOf(message)])" class="time time-right">{{message.sentDate | date:'h:mm a'}}</div>
+                        <div *ngIf="message.attachmentUrl == ''" class="msg msg-right fade-in" [ngClass]="{'startMessageRight' : messageIsStart[messages.indexOf(message)], 'middleMessageRight' : messageIsMiddle[messages.indexOf(message)]}">{{message.message}}</div>
+                        <div *ngIf="message.attachmentUrl != ''" class="attachmentContainerRight" [ngClass]="{'hasAttachmentMessage' : hasAttachmentMessage[messages.indexOf(message)]}">
+                            <img class="attachment" src={{message.attachmentUrl}} alt="attachment">
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!-- <div *ngIf="isInquiry" class="attachmentContainerRight">
+                    <div class="attachmentMessageText">This attachment will be</div>
+                    <div class="attachmentMessageTextCont">sent with your message</div>
+                    <img class="attachment" src={{inquiryImage}} alt="inquiring">
+                </div> -->
+
+            </div>
+        </div>
+
+        <div class="input-group mb-3" id="inputGroup">
+            <input (keyUp.enter)="sendMessage()" [(ngModel)]="messageText" #ctrl="ngModel" id="messageInput" type="text" class="form-control" placeholder="Message" aria-describedby="basic-addon2" autocomplete="off">
+            <div class="input-group-append">
+                <button (click)="sendMessage()" id="sendButton" class="btn btn-outline-secondary" type="button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
