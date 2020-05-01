@@ -16,9 +16,7 @@
 
 <body>
     <div id="container">
-        <div>
-            {% include "header/index.html" %}
-        </div>
+        {% include "header/header.html" %}
 
         <div id="otherUser" class="d-flex justify-content-between">
             <img (click)="back()" id="backIcon" src="{% static 'images/back.png' %}" alt="back">
