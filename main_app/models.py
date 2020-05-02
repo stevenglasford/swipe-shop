@@ -2,31 +2,120 @@ from django.db import models
 
 
 class Users(models.Model):
-    username = models.CharField(max_length=25, primary_key=True)
-    password = models.CharField(max_length=100)
+    username = models.CharField(
+        primary_key=True,
+        max_length=25,
+    )
+    password = models.CharField(
+        max_length=100,
+    )
+    bio = models.TextField(
+        blank=True,
+        null=True,
+    )
+    profilePicture = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    city = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.username
 
 
 class Messages(models.Model):
-    MessageID = models.BigIntegerField(primary_key=True)
-    UserIDFrom = models.CharField(max_length=25)
-    UserIDTo = models.CharField(max_length=25)
-    UserIDTo = models.DateTimeField()
-    ProductID = models.BigIntegerField()
+    MessageID = models.AutoField(
+        primary_key=True,
+    )
+    UserIDFrom = models.ForeignKey(
+        'Users',
+        on_delete=models.CASCADE,
+        related_name='userFrom',
+    )
+    UserIDTo = models.ForeignKey(
+        'Users',
+        on_delete=models.CASCADE,
+        related_name='userTo',
+    )
+    MessageSent = models.DateTimeField(auto_now=True)
+    ProductID = models.ForeignKey(
+        'Products',
+        on_delete=models.CASCADE,
+        related_name='message_product',
+    )
     MessageBody = models.TextField()
 
     def __str__(self):
-        return self.MessageID
+        return str(self.MessageID)
 
 
 class Products(models.Model):
-    ProductID = models.BigIntegerField(primary_key=True)
-    UserID = models.BigIntegerField()
-    ProductName = models.CharField(max_length=250)
+    ProductID = models.AutoField(
+        primary_key=True,
+    )
+    UserID = models.ForeignKey(
+        'Users',
+        on_delete=models.CASCADE,
+        related_name='user',
+    )
+    ProductName = models.CharField(
+        max_length=250,
+    )
     Price = models.PositiveSmallIntegerField()
-    Pictures = models.ImageField()
+    Description = models.TextField(
+        blank=True,
+        null=True,
+    )
+    Picture1 = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    Picture2 = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    Picture3 = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    Picture4 = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    Picture5 = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    Picture6 = models.ImageField(
+        blank=True,
+        null=True,
+    )
+    Picture7 = models.ImageField(
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
-        return self.ProductID
+        return str(self.ProductID)
+
+
+class Likes(models.Model):
+    likeId = models.AutoField(
+        primary_key=True,
+    )
+    user = models.ManyToManyField(
+        'Users',
+        related_name='like_users',
+    )
+    product = models.ForeignKey(
+        'Products',
+        on_delete=models.CASCADE,
+        related_name='liked_product',
+    )
+
+    def __str__(self):
+        return str(self.likeId)
