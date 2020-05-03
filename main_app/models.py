@@ -122,3 +122,24 @@ class Likes(models.Model):
 
     def __str__(self):
         return str(self.likeId)
+
+
+class Hates(models.Model):
+    HateID = models.AutoField(
+        primary_key=True,
+    )
+    user = models.ForeignKey(
+        'Users',
+        unique=False,
+        on_delete=models.CASCADE,
+        related_name='hate_users',
+        null=True,
+    )
+    product = models.ForeignKey(
+        'Products',
+        on_delete=models.CASCADE,
+        related_name='hated_product',
+    )
+
+    def __str__(self):
+        return str(self.HateID)
