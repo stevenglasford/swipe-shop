@@ -107,9 +107,12 @@ class Likes(models.Model):
     likeId = models.AutoField(
         primary_key=True,
     )
-    user = models.ManyToManyField(
+    user = models.ForeignKey(
         'Users',
+        unique=False,
+        on_delete=models.CASCADE,
         related_name='like_users',
+        null=True,
     )
     product = models.ForeignKey(
         'Products',
